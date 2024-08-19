@@ -43,4 +43,5 @@ jobs:
     uses: ./.github/workflows/_win-build.yml
     with:
       build-environment: xpu-py3.10
-      cuda-version: xpu
+      cuda-version: cpu
+      use-xpu: true
