@@ -647,7 +647,10 @@ class _BaseDataLoaderIter:
         # for other backends, pin_memory_device need to set. if not set
         # default behaviour is CUDA device. if pin_memory_device is selected
         # and pin_memory is not set, the default behaviour false.
-        if len(loader.pin_memory_device) == 0:
+        
+        if isinstance(loader.pin_memory_device, str) and (len(loader.pin_memory_device) == 0):
+            # Add judgment avoidance "TypeError: object of type 'torch.device' has no len()"
+            # loader.pin_memory_device It may be a device object
             self._pin_memory = loader.pin_memory and torch.cuda.is_available()
             self._pin_memory_device = None
         else:
